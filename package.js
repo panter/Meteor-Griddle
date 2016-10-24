@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'utilities:meteor-griddle',
+  name: 'panter:meteor-griddle',
   summary: 'A smart Meteor wrapper for the Griddle React component',
   version: '1.2.2',
   git: 'https://github.com/meteor-utilities/meteor-griddle.git'

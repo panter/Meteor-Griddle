@@ -17,6 +17,7 @@ MeteorGriddle = React.createClass({
     filteredFields: React.PropTypes.array, // an array of fields to search through when filtering
     subsManager: React.PropTypes.object,
     transformResult: React.PropTypes.func, // a function to transform one entry in the list
+    baseQuery: React.PropTypes.object, // selector that will be used for every query
     // plus regular Griddle props
   },
 
@@ -27,7 +28,8 @@ MeteorGriddle = React.createClass({
       useExternal: false,
       externalFilterDebounceWait: 300,
       externalResultsPerPage: 10,
-      transformResult: (entry) => entry // identity
+      transformResult: (entry) => entry, // identity
+      baseQuery: {}
     };
   },
 
@@ -46,7 +48,7 @@ MeteorGriddle = React.createClass({
 
   componentWillMount() {
     this.applyQuery = _.debounce((query) => {
-      this.setState({ query });
+      this.setState({ query: {...this.props.baseQuery, ...query} });
     }, this.props.externalFilterDebounceWait);
   },
 
@@ -102,7 +104,7 @@ MeteorGriddle = React.createClass({
 
   resetQuery() {
     this.setState({
-      query: {},
+      query: this.props.baseQuery
     });
   },
 
