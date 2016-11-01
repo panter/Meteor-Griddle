@@ -41,19 +41,19 @@ MeteorGriddle = React.createClass({
       externalResultsPerPage: this.props.externalResultsPerPage,
       externalSortColumn: this.props.externalSortColumn,
       externalSortAscending: this.props.externalSortAscending,
-      query: {},
+      query: this.props.baseQuery
     };
 
   },
 
   componentWillMount() {
+
     this.applyQuery = _.debounce((query) => {
       this.setState({ query: {...this.props.baseQuery, ...query} });
     }, this.props.externalFilterDebounceWait);
   },
 
   getMeteorData() {
-
     // Get a count of the number of items matching the current filter.
     // If no filter is set it will return the total number of items in the
     // collection.
